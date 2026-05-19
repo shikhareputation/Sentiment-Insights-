@@ -1,0 +1,6 @@
+{
+  "name": "Sentiment Insight Pro",
+  "description": "Advanced sentiment analysis dashboard with journey analytics, theme exploration, and location leaderboards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
