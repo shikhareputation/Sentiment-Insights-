@@ -87,10 +87,40 @@ const industryData = {
       { week: "W4", sentiment: 61, maintenance: 42 },
     ],
     correlation: [
-      { driver: "Rude behavior", correlation: 0.82, impact: -22 },
-      { driver: "Delayed response", correlation: 0.76, impact: -18 },
-      { driver: "Issue not fixed", correlation: 0.71, impact: -19 },
-      { driver: "Poor communication", correlation: 0.66, impact: -14 },
+      {
+        impactedTheme: "Amenities",
+        influencingTheme: "Maintenance Staff",
+        overallScore: 0.72,
+        direction: "Negative",
+        interpretation: "Amenities sentiment is significantly affected by Maintenance Staff performance, particularly around repair speed and staff professionalism.",
+        drivers: [
+          { driver: "Rude behavior", correlation: 0.82, interpretation: "Unprofessional interactions at amenities areas drive high negative sentiment." },
+          { driver: "Delayed response", correlation: 0.76, interpretation: "Slow turnaround on amenity repairs directly impacts usage satisfaction." },
+          { driver: "Issue not fixed", correlation: 0.71, interpretation: "Incomplete repairs to popular facilities create recurring frustration." },
+          { driver: "Poor communication", correlation: 0.66, interpretation: "Unclear updates about facility closures or repairs correlate with decline." },
+        ],
+      },
+      {
+        impactedTheme: "Maintenance Staff",
+        influencingTheme: "Leasing Office",
+        overallScore: 0.45,
+        direction: "Positive",
+        interpretation: "Leasing office responsiveness sets the tone for maintenance expectations, showing a moderate positive link.",
+        drivers: [
+          { driver: "Move-in support", correlation: 0.52, interpretation: "Smooth move-ins often lead to more patient residents during first maintenance calls." },
+          { driver: "Renewal process", correlation: 0.38, interpretation: "Clear lease terms correlate slightly with general staff trust." },
+        ],
+      },
+      {
+        impactedTheme: "Leasing Office",
+        influencingTheme: "Amenities",
+        overallScore: 0.31,
+        direction: "Positive",
+        interpretation: "High quality amenities provide minor positive sentiment lift for leasing office operations.",
+        drivers: [
+          { driver: "Gym equipment", correlation: 0.35, interpretation: "Well-maintained gym facilities are linked to higher leasing office praise." },
+        ]
+      }
     ],
     sample: "The maintenance person finally came after three days, acted annoyed, and the leak still was not fixed.",
   },
@@ -131,10 +161,27 @@ const industryData = {
       { week: "W4", sentiment: 64, maintenance: 49 },
     ],
     correlation: [
-      { driver: "Food temperature", correlation: 0.79, impact: -21 },
-      { driver: "Order accuracy", correlation: 0.74, impact: -17 },
-      { driver: "Food portion", correlation: 0.68, impact: -13 },
-      { driver: "Food taste", correlation: 0.58, impact: -9 },
+      {
+        impactedTheme: "Food Quality",
+        influencingTheme: "Delivery Experience",
+        overallScore: 0.81,
+        direction: "Negative",
+        interpretation: "Food quality perceptions are intensely tied to delivery performance, specifically temperature and timeliness.",
+        drivers: [
+          { driver: "Late delivery", correlation: 0.88, interpretation: "Wait times longer than 40m are strongly associated with food temperature complaints." },
+          { driver: "Driver behavior", correlation: 0.34, interpretation: "Professional handoffs provide a slight buffer against minor quality issues." },
+        ],
+      },
+      {
+        impactedTheme: "Delivery Experience",
+        influencingTheme: "Food Quality",
+        overallScore: 0.54,
+        direction: "Positive",
+        interpretation: "High food satisfaction provides a moderate lift to overall delivery rating even with minor delays.",
+        drivers: [
+          { driver: "Food taste", correlation: 0.58, interpretation: "Great tasting food is linked to higher tolerance for delivery logistics." },
+        ]
+      }
     ],
     sample: "The burger was cold, fries were soggy, and the portion felt much smaller than usual.",
   },
@@ -173,10 +220,17 @@ const industryData = {
       { week: "W4", sentiment: 72, maintenance: 67 },
     ],
     correlation: [
-      { driver: "Check-in delay", correlation: 0.7, impact: -12 },
-      { driver: "Noise", correlation: 0.61, impact: -10 },
-      { driver: "Staff courtesy", correlation: 0.55, impact: 9 },
-      { driver: "Cleanliness", correlation: 0.49, impact: 5 },
+      {
+        impactedTheme: "Room Experience",
+        influencingTheme: "Front Desk Staff",
+        overallScore: 0.65,
+        direction: "Positive",
+        interpretation: "Front desk helpfulness creates a 'halo effect' that improves subsequent room satisfaction scores.",
+        drivers: [
+          { driver: "Staff courtesy", correlation: 0.72, interpretation: "Helpful check-in staff are linked to higher room cleanliness ratings." },
+          { driver: "Check-in delay", correlation: 0.58, interpretation: "Long waits at front desk correlate with higher sensitivity to room noise." },
+        ],
+      }
     ],
     sample: "The front desk team was nice, but check-in took too long and the hallway was noisy at night.",
   },
@@ -215,10 +269,17 @@ const industryData = {
       { week: "W4", sentiment: 66, maintenance: 57 },
     ],
     correlation: [
-      { driver: "Cost explanation", correlation: 0.77, impact: -16 },
-      { driver: "Repeat visit", correlation: 0.69, impact: -14 },
-      { driver: "Status updates", correlation: 0.63, impact: -8 },
-      { driver: "Parts availability", correlation: 0.48, impact: -5 },
+      {
+        impactedTheme: "Repair Quality",
+        influencingTheme: "Service Advisor",
+        overallScore: 0.78,
+        direction: "Negative",
+        interpretation: "Unclear explanations from service advisors significantly increase customer doubt about actual repair quality.",
+        drivers: [
+          { driver: "Cost explanation", correlation: 0.84, interpretation: "Ambiguous charges are highly correlated with loss of trust in mechanical work." },
+          { driver: "Status updates", correlation: 0.72, interpretation: "Poor communication frequency is linked to perceived delays in repair completion." },
+        ],
+      }
     ],
     sample: "The repair worked, but the advisor never explained the extra charge clearly.",
   },
@@ -390,6 +451,17 @@ export default function SentimentInsightDashboard() {
   // @ts-ignore
   const data = industryData[industry];
   const theme = data.themes[selectedTheme] || data.themes[0];
+  const correlationData = useMemo(() => {
+    return data.correlation.find((c: any) => c.impactedTheme === theme.name) || null;
+  }, [data.correlation, theme.name]);
+
+  const getCorrelationStrength = (score: number) => {
+    const absScore = Math.abs(score);
+    if (absScore >= 0.7) return "Very Strong";
+    if (absScore >= 0.5) return "Strong";
+    if (absScore >= 0.3) return "Moderate";
+    return "Weak";
+  };
   const subtheme = theme.subthemes[selectedSubtheme] || theme.subthemes[0];
   const keyword = selectedKeyword || subtheme?.keywords?.[0];
 
@@ -957,20 +1029,102 @@ export default function SentimentInsightDashboard() {
 
           <Card className="rounded-3xl border-0 shadow-sm lg:col-span-5 transition-all hover:shadow-md">
             <CardContent className="p-5">
-              <div className="mb-4"><h2 className="text-h4 font-bold text-neutral-900">Correlation drivers</h2><p className="text-body-s text-neutral-500 font-bold uppercase tracking-tight">Which sub-themes strongly explain sentiment decline.</p></div>
-              <div className="h-72">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={data.correlation} layout="vertical" margin={{ top: 4, right: 20, left: 32, bottom: 4 }}>
-                    <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#E5E5E5" />
-                    <XAxis type="number" domain={[0, 1]} tick={{ fontSize: 10, fontWeight: 700 }} />
-                    <YAxis dataKey="driver" type="category" width={110} tick={{ fontSize: 10, fontWeight: 700 }} />
-                    <Tooltip />
-                    <Bar dataKey="correlation" name="Correlation strength" fill="var(--color-neutral-400)" radius={[0, 10, 10, 0]}>
-                      {data.correlation.map((entry: any) => <Cell key={entry.driver} fill={entry.correlation > 0.7 ? 'var(--color-neutral-900)' : 'var(--color-neutral-400)'} />)}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
+              <div className="mb-6">
+                <h2 className="text-h4 font-bold text-neutral-900">Correlation Drivers</h2>
+                {correlationData ? (
+                  <p className="text-body-s text-neutral-500 font-bold uppercase tracking-tight">
+                    Which sub-themes from <span className="text-brand-800">{correlationData.influencingTheme}</span> explain sentiment decline in <span className="text-brand-800">{correlationData.impactedTheme}</span>?
+                  </p>
+                ) : (
+                  <p className="text-body-s text-neutral-500 font-bold uppercase tracking-tight">Cross-theme sentiment impact analysis.</p>
+                )}
               </div>
+
+              {!correlationData ? (
+                <div className="flex h-[400px] flex-col items-center justify-center rounded-2xl bg-neutral-50 border border-dashed border-neutral-200 p-8 text-center">
+                  <AlertTriangle className="mb-3 h-10 w-10 text-neutral-300" />
+                  <p className="text-body-m font-bold text-neutral-400">Not enough data to determine correlation.</p>
+                  <p className="mt-2 text-body-s text-neutral-400">Try selecting a different theme to see cross-theme impact drivers.</p>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  <div className="grid grid-cols-2 gap-4 rounded-2xl bg-neutral-50 p-4 border border-neutral-100">
+                    <div>
+                      <p className="text-body-xs font-bold text-neutral-400 uppercase tracking-widest">Overall Correlation</p>
+                      <p className="mt-1 text-h4 font-bold text-neutral-950">{(correlationData.overallScore * 100).toFixed(0)}%</p>
+                    </div>
+                    <div>
+                      <p className="text-body-xs font-bold text-neutral-400 uppercase tracking-widest">Direction & Strength</p>
+                      <p className="mt-1 flex items-center gap-2 text-body-s font-bold">
+                        <span className={cls(correlationData.direction === "Negative" ? "text-error-500" : "text-success-500")}>
+                          {correlationData.direction}
+                        </span>
+                        <span className="text-neutral-300">•</span>
+                        <span className="text-neutral-700">{getCorrelationStrength(correlationData.overallScore)}</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="h-64">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={correlationData.drivers} layout="vertical" margin={{ top: 4, right: 30, left: 10, bottom: 4 }}>
+                        <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#E5E5E5" />
+                        <XAxis type="number" domain={[0, 1]} tick={{ fontSize: 10, fontWeight: 700 }} />
+                        <YAxis dataKey="driver" type="category" width={110} tick={{ fontSize: 10, fontWeight: 700 }} />
+                        <Tooltip 
+                          content={({ active, payload }) => {
+                            if (active && payload && payload.length) {
+                              const entry = payload[0].payload;
+                              return (
+                                <div className="rounded-xl border border-neutral-200 bg-white p-3 shadow-xl backdrop-blur-md">
+                                  <p className="text-body-xs font-bold text-neutral-400 uppercase tracking-widest">Influencing Sub-theme</p>
+                                  <p className="mb-2 font-bold text-neutral-900">{entry.driver}</p>
+                                  <div className="grid grid-cols-2 gap-x-4 gap-y-2 border-t border-neutral-100 pt-2 text-body-xs">
+                                    <div>
+                                      <p className="text-neutral-400 font-bold uppercase">Incluencing: </p>
+                                      <p className="text-neutral-900 font-bold">{correlationData.influencingTheme}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-neutral-400 font-bold uppercase">Impacted: </p>
+                                      <p className="text-neutral-900 font-bold">{correlationData.impactedTheme}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-neutral-400 font-bold uppercase">Score: </p>
+                                      <p className="text-neutral-900 font-bold">{entry.correlation}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-neutral-400 font-bold uppercase">Impact: </p>
+                                      <p className={cls("font-bold", correlationData.direction === "Negative" ? "text-error-500" : "text-success-500")}>
+                                        {correlationData.direction}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <p className="mt-3 border-t border-neutral-100 pt-2 text-body-xs italic text-neutral-600 leading-relaxed">
+                                    {entry.interpretation}
+                                  </p>
+                                </div>
+                              );
+                            }
+                            return null;
+                          }}
+                        />
+                        <Bar dataKey="correlation" name="Correlation score" fill="var(--color-brand-accent)" opacity={0.6} radius={[0, 10, 10, 0]}>
+                          {correlationData.drivers.map((entry: any) => (
+                            <Cell key={entry.driver} fill={entry.correlation > 0.75 ? 'var(--color-brand-accent)' : 'var(--color-neutral-400)'} />
+                          ))}
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+
+                  <div className="rounded-2xl bg-brand-50 p-4 border border-brand-100">
+                    <p className="text-body-xs font-bold text-brand-800 uppercase tracking-widest mb-1">Business Interpretation</p>
+                    <p className="text-body-s font-medium text-brand-950 leading-relaxed">
+                      {correlationData.interpretation}
+                    </p>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
