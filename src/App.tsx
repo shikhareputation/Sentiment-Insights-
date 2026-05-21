@@ -269,10 +269,10 @@ function ReviewTable({ onBack }: { onBack: () => void }) {
         <h2 className="text-2xl font-bold">Reviews (26)</h2>
       </div>
 
-      <div className="flex flex-wrap items-center gap-2 border-y border-slate-200 py-3 text-sm">
+      <div className="flex flex-wrap items-center gap-2 border-y border-neutral-200 py-3 text-body-s">
         {["Date", "Location", "Rating", "Sentiment", "Hard Disagreement", "Topic"].map((filter) => (
-          <button key={filter} className="flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-1.5 font-medium text-slate-700 shadow-sm hover:bg-slate-50">
-            {filter} <ChevronDown className="h-4 w-4 text-slate-400" />
+          <button key={filter} className="flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-3 py-1.5 font-bold text-neutral-700 shadow-sm hover:bg-neutral-100">
+            {filter} <ChevronDown className="h-4 w-4 text-neutral-400" />
           </button>
         ))}
       </div>
@@ -282,13 +282,13 @@ function ReviewTable({ onBack }: { onBack: () => void }) {
         <span className="rounded bg-rose-100 px-2 py-0.5 text-rose-700">opinion</span>
       </div>
 
-      <p className="text-sm italic text-slate-500">
+      <p className="text-body-s italic text-neutral-500">
         Does this category belong on this review? Vote with 👍 / 👎.
       </p>
 
-      <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-        <table className="w-full text-left text-sm">
-          <thead className="bg-slate-50 text-[10px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
+      <div className="overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
+        <table className="w-full text-left text-body-s">
+          <thead className="bg-neutral-100 text-body-xs font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-200">
             <tr>
               <th className="px-4 py-3">Date</th>
               <th className="px-4 py-3">Location</th>
@@ -300,50 +300,50 @@ function ReviewTable({ onBack }: { onBack: () => void }) {
               <th className="px-4 py-3 text-center">Vote</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-neutral-100">
             {mockReviews.map((item, idx) => (
-              <tr key={idx} className="hover:bg-slate-50 transition-colors">
-                <td className="px-4 py-4 whitespace-nowrap text-slate-600">{item.date}</td>
-                <td className="px-4 py-4 text-slate-600 font-medium">{item.location}</td>
+              <tr key={idx} className="hover:bg-neutral-100 transition-colors">
+                <td className="px-4 py-4 whitespace-nowrap text-neutral-600 font-bold">{item.date}</td>
+                <td className="px-4 py-4 text-neutral-900 font-bold">{item.location}</td>
                 <td className="px-4 py-4">
-                  <div className="flex gap-0.5 text-amber-400">
+                  <div className="flex gap-0.5 text-amber-500">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className={cls("h-3 w-3", i < item.rating ? "fill-current" : "text-slate-200 fill-slate-200")} />
+                      <Star key={i} className={cls("h-3 w-3", i < item.rating ? "fill-current" : "text-neutral-200 fill-neutral-200")} />
                     ))}
                   </div>
                 </td>
                 <td className="px-4 py-4">
                   <span className={cls(
-                    "rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-tighter",
-                    item.sentiment === "Negative" ? "bg-rose-100 text-rose-700" : "bg-emerald-100 text-emerald-700"
+                    "rounded-full px-2 py-0.5 text-body-xs font-bold uppercase tracking-tighter",
+                    item.sentiment === "Negative" ? "bg-error-500/10 text-error-500" : "bg-success-500/10 text-success-500"
                   )}>
                     {item.sentiment}
                   </span>
                 </td>
-                <td className="px-4 py-4 text-slate-400 text-center">{item.oldSentiment}</td>
+                <td className="px-4 py-4 text-neutral-400 text-center">{item.oldSentiment}</td>
                 <td className="px-4 py-4">
-                  <span className="rounded bg-indigo-100 px-2 py-1 text-[10px] font-medium text-indigo-700">
+                  <span className="rounded bg-brand-800/10 px-2 py-1 text-body-xs font-bold text-brand-800">
                     {item.topic}
                   </span>
                 </td>
-                <td className="px-4 py-4 text-slate-600 leading-relaxed text-xs">
+                <td className="px-4 py-4 text-neutral-700 leading-relaxed text-body-xs">
                   {item.review}
                 </td>
                 <td className="px-4 py-4">
-                  <div className="flex items-center justify-center gap-3 text-slate-300">
-                    <button className="hover:text-emerald-500 transition-colors"><ThumbsUp className="h-4 w-4" /></button>
-                    <button className="hover:text-rose-500 transition-colors"><ThumbsDown className="h-4 w-4" /></button>
+                  <div className="flex items-center justify-center gap-3 text-neutral-300">
+                    <button className="hover:text-success-500 transition-colors"><ThumbsUp className="h-4 w-4" /></button>
+                    <button className="hover:text-error-500 transition-colors"><ThumbsDown className="h-4 w-4" /></button>
                   </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <div className="flex items-center justify-between border-t border-slate-100 bg-slate-50 px-4 py-3">
-          <span className="text-[10px] font-medium text-slate-400 uppercase tracking-wider">Page 1 of 3</span>
+        <div className="flex items-center justify-between border-t border-neutral-100 bg-neutral-100 px-4 py-3">
+          <span className="text-body-xs font-bold text-neutral-400 uppercase tracking-wider">Page 1 of 3</span>
           <div className="flex gap-2">
-            <Button variant="outline" size="sm" className="h-8 rounded text-[10px] font-bold uppercase">PREVIOUS</Button>
-            <Button variant="outline" size="sm" className="h-8 rounded text-[10px] font-bold uppercase">NEXT</Button>
+            <Button variant="outline" size="sm" className="h-8 rounded text-body-xs font-bold uppercase">PREVIOUS</Button>
+            <Button variant="outline" size="sm" className="h-8 rounded text-body-xs font-bold uppercase">NEXT</Button>
           </div>
         </div>
       </div>
@@ -354,23 +354,23 @@ function ReviewTable({ onBack }: { onBack: () => void }) {
 function SentimentPill({ value }: { value: number }) {
   const label = value >= 70 ? "Positive" : value >= 50 ? "Mixed" : "Negative";
   return (
-    <span className={cls("rounded-full px-3 py-1 text-xs font-medium", value >= 70 ? "bg-emerald-100 text-emerald-700" : value >= 50 ? "bg-amber-100 text-amber-700" : "bg-rose-100 text-rose-700")}>{label}</span>
+    <span className={cls("rounded-full px-3 py-1 text-body-xs font-bold uppercase tracking-wider", value >= 70 ? "bg-success-500/10 text-success-500" : value >= 50 ? "bg-warning-500/10 text-warning-500" : "bg-error-500/10 text-error-500")}>{label}</span>
   );
 }
 
 function MetricCard({ title, value, delta, icon: Icon }: { title: string, value: string, delta: number, icon: any }) {
   const up = delta >= 0;
   return (
-    <Card className="rounded-2xl border-0 shadow-sm">
+    <Card className="rounded-2xl border-0 shadow-sm transition-all hover:shadow-md">
       <CardContent className="p-5">
         <div className="flex items-center justify-between">
-          <div className="rounded-2xl bg-slate-100 p-3"><Icon className="h-5 w-5 text-slate-700" /></div>
-          <div className={cls("flex items-center gap-1 text-sm font-medium", up ? "text-emerald-600" : "text-rose-600")}>
+          <div className="rounded-2xl bg-neutral-100 p-3"><Icon className="h-5 w-5 text-neutral-700" /></div>
+          <div className={cls("flex items-center gap-1 text-body-s font-bold", up ? "text-success-500" : "text-error-500")}>
             {up ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}{Math.abs(delta)} pts
           </div>
         </div>
-        <p className="mt-4 text-sm text-slate-500">{title}</p>
-        <p className="mt-1 text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
+        <p className="mt-4 text-body-m font-medium text-neutral-500">{title}</p>
+        <p className="mt-1 text-h1 font-bold tracking-tight text-neutral-950">{value}</p>
       </CardContent>
     </Card>
   );
@@ -553,7 +553,7 @@ export default function SentimentInsightDashboard() {
 
   if (viewMode === 'reviews') {
     return (
-      <div className="min-h-screen bg-slate-50 p-6 text-slate-950">
+      <div className="min-h-screen bg-neutral-100 p-6 text-neutral-950">
         <div className="mx-auto max-w-[1600px]">
           <ReviewTable onBack={() => setViewMode('main')} />
         </div>
@@ -562,17 +562,17 @@ export default function SentimentInsightDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 p-6 text-slate-950">
+    <div className="min-h-screen bg-neutral-100 p-6 text-neutral-900">
       <div className="mx-auto max-w-[1600px] space-y-6">
 
-        <div className="flex items-center gap-2 rounded-3xl bg-white p-2 shadow-sm w-fit border border-slate-200">
+        <div className="flex items-center gap-2 rounded-3xl bg-white p-2 shadow-sm w-fit border border-neutral-200">
           <button
             onClick={() => setActiveTab('insights')}
             className={cls(
-              'rounded-2xl px-5 py-2 text-sm font-medium transition',
+              'rounded-2xl px-5 py-2 text-body-s font-medium transition',
               activeTab === 'insights'
-                ? 'bg-[#090909] text-white'
-                : 'text-slate-600 hover:bg-slate-100'
+                ? 'bg-brand-950 text-white'
+                : 'text-neutral-500 hover:bg-neutral-100'
             )}
           >
             Sentiment Insights
@@ -581,10 +581,10 @@ export default function SentimentInsightDashboard() {
           <button
             onClick={() => setActiveTab('journey')}
             className={cls(
-              'rounded-2xl px-5 py-2 text-sm font-medium transition',
+              'rounded-2xl px-5 py-2 text-body-s font-medium transition',
               activeTab === 'journey'
-                ? 'bg-[#090909] text-white'
-                : 'text-slate-600 hover:bg-slate-100'
+                ? 'bg-brand-950 text-white'
+                : 'text-neutral-500 hover:bg-neutral-100'
             )}
           >
             Journey Analytics
@@ -593,10 +593,10 @@ export default function SentimentInsightDashboard() {
           <button
             onClick={() => setActiveTab('explorer')}
             className={cls(
-              'rounded-2xl px-5 py-2 text-sm font-medium transition',
+              'rounded-2xl px-5 py-2 text-body-s font-medium transition',
               activeTab === 'explorer'
-                ? 'bg-[#090909] text-white'
-                : 'text-slate-600 hover:bg-slate-100'
+                ? 'bg-brand-950 text-white'
+                : 'text-neutral-500 hover:bg-neutral-100'
             )}
           >
             Theme Explorer
@@ -607,34 +607,34 @@ export default function SentimentInsightDashboard() {
         <div className="space-y-6">
           <Card className="overflow-hidden rounded-3xl border-0 shadow-sm">
             <CardContent className="p-0">
-              <div className="border-b border-slate-200 bg-white p-5">
+              <div className="border-b border-neutral-200 bg-white p-5">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                   <div>
-                    <h2 className="text-3xl font-semibold tracking-tight">Journey Insights</h2>
-                    <p className="mt-1 text-sm text-slate-500">Automotive journey example with stage-level sentiment, categories, trends, word cloud, and quotes.</p>
+                    <h2 className="text-h1 font-bold tracking-tight">Journey Insights</h2>
+                    <p className="mt-1 text-body-m text-neutral-500">Automotive journey example with stage-level sentiment, categories, trends, word cloud, and quotes.</p>
                   </div>
                   <div className="flex flex-wrap gap-3">
-                    <select className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm"><option>Service</option><option>Sales</option></select>
-                    <select className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm"><option>Last year</option><option>Last quarter</option></select>
-                    <select className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm"><option>Show Categories</option><option>Show Themes</option></select>
+                    <select className="rounded-2xl border border-neutral-200 bg-white px-4 py-2 text-body-s font-bold text-neutral-700 outline-none"><option>Service</option><option>Sales</option></select>
+                    <select className="rounded-2xl border border-neutral-200 bg-white px-4 py-2 text-body-s font-bold text-neutral-700 outline-none"><option>Last year</option><option>Last quarter</option></select>
+                    <select className="rounded-2xl border border-neutral-200 bg-white px-4 py-2 text-body-s font-bold text-neutral-700 outline-none"><option>Show Categories</option><option>Show Themes</option></select>
                   </div>
                 </div>
               </div>
 
-              <div className="overflow-x-auto bg-slate-50 p-6">
+              <div className="overflow-x-auto bg-neutral-100 p-6">
                 <div className="flex min-w-[1300px] gap-5">
                   {journeyStages.map((step, idx) => (
-                    <button key={step.stage} onClick={() => setSelectedJourneyStage(idx)} className={cls('min-w-[205px] flex-1 rounded-3xl border bg-white p-5 text-left shadow-sm transition', selectedJourneyStage === idx ? 'border-cyan-600 ring-2 ring-cyan-100' : 'border-slate-200 hover:border-cyan-300')}>
-                      <p className="text-xs uppercase tracking-wide text-slate-400">Journey Stage {idx + 1}</p>
-                      <h3 className="mt-2 text-2xl font-semibold text-cyan-700">{step.stage}</h3>
-                      <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4 text-center">
-                        <p className="font-semibold">{step.stage}</p>
-                        <p className="text-sm text-slate-600">{step.mentions.toLocaleString()} Mentions</p>
-                        <p className="text-sm text-slate-600">Sentiment: {step.score}/100</p>
+                    <button key={step.stage} onClick={() => setSelectedJourneyStage(idx)} className={cls('min-w-[205px] flex-1 rounded-3xl border bg-white p-5 text-left shadow-sm transition-all hover:shadow-md', selectedJourneyStage === idx ? 'border-brand-900 ring-2 ring-brand-900/10' : 'border-neutral-200 hover:border-brand-800')}>
+                      <p className="text-body-xs font-bold uppercase tracking-wide text-neutral-400">Journey Stage {idx + 1}</p>
+                      <h3 className="mt-2 text-h4 font-bold text-brand-950">{step.stage}</h3>
+                      <div className="mt-6 rounded-2xl border border-neutral-200 bg-white p-4 text-center">
+                        <p className="font-bold text-body-m">{step.stage}</p>
+                        <p className="text-body-s text-neutral-600 font-medium">{step.mentions.toLocaleString()} Mentions</p>
+                        <p className="text-body-s text-neutral-600 font-medium">Sentiment: {step.score}/100</p>
                       </div>
-                      <div className="mt-4 rounded-2xl bg-slate-50 p-3">
-                        <p className="text-xs uppercase text-slate-400">Top category</p>
-                        <p className="font-semibold text-slate-900">{step.topDriver}</p>
+                      <div className="mt-4 rounded-2xl bg-neutral-100 p-3">
+                        <p className="text-body-xs font-bold uppercase text-neutral-400">Top category</p>
+                        <p className="font-bold text-body-s text-neutral-900">{step.topDriver}</p>
                       </div>
                     </button>
                   ))}
@@ -643,25 +643,25 @@ export default function SentimentInsightDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="rounded-3xl border-0 shadow-sm">
+          <Card className="rounded-3xl border-0 shadow-sm transition-all hover:shadow-md">
             <CardContent className="p-6">
               <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                 <div>
-                  <p className="mb-2 text-sm text-cyan-700">Journey Insights / Service / {selectedStage.stage}</p>
-                  <h2 className="text-3xl font-semibold tracking-tight">{selectedStage.stage}</h2>
+                  <p className="mb-2 text-body-s font-bold text-brand-800">Journey Insights / Service / {selectedStage.stage}</p>
+                  <h2 className="text-h1 font-bold tracking-tight text-neutral-900">{selectedStage.stage}</h2>
                 </div>
                 <Button variant="outline" className="rounded-full">•••</Button>
               </div>
 
               <div className="grid gap-6 lg:grid-cols-12">
                 <div className="lg:col-span-4">
-                  <h3 className="text-lg font-semibold">Sentiment</h3>
-                  <div className="mt-6 flex items-end gap-3"><p className="text-5xl font-semibold">{selectedStage.score}/100</p><p className={cls('pb-2 text-sm font-medium', selectedStage.change >= 0 ? 'text-emerald-600' : 'text-rose-600')}>{selectedStage.change >= 0 ? '↑' : '↓'} {Math.abs(selectedStage.change)}</p></div>
-                  <p className="mt-1 text-sm text-slate-400">From previous period</p>
+                  <h3 className="text-h4 font-bold text-neutral-600">Sentiment</h3>
+                  <div className="mt-6 flex items-end gap-3"><p className="text-5xl font-bold text-neutral-950">{selectedStage.score}/100</p><p className={cls('pb-2 text-body-s font-bold', selectedStage.change >= 0 ? 'text-success-500' : 'text-error-500')}>{selectedStage.change >= 0 ? '↑' : '↓'} {Math.abs(selectedStage.change)}</p></div>
+                  <p className="mt-1 text-body-xs font-medium text-neutral-400 uppercase tracking-wider">From previous period</p>
                   <div className="mt-8 space-y-4">
-                    {[['Positive', selectedStage.positive, 'bg-emerald-400'], ['Neutral', selectedStage.neutral, 'bg-amber-400'], ['Negative', selectedStage.negative, 'bg-rose-500']].map(([label, val, color]) => (
-                      <div key={label as string} className="grid grid-cols-[80px_1fr_80px] items-center gap-3 text-sm">
-                        <span className="text-slate-500">{label as string}</span><div className="h-3 rounded-full bg-slate-100"><div className={cls('h-3 rounded-full', color as string)} style={{ width: `${Math.min(100, ((val as number) / Math.max(selectedStage.positive, selectedStage.neutral, selectedStage.negative)) * 100)}%` }} /></div><span className="font-medium">{val as number}</span>
+                    {[['Positive', selectedStage.positive, 'bg-success-500'], ['Neutral', selectedStage.neutral, 'bg-warning-500'], ['Negative', selectedStage.negative, 'bg-error-500']].map(([label, val, color]) => (
+                      <div key={label as string} className="grid grid-cols-[80px_1fr_80px] items-center gap-3 text-body-s font-bold uppercase tracking-wider">
+                        <span className="text-neutral-500">{label as string}</span><div className="h-3 rounded-full bg-neutral-100"><div className={cls('h-3 rounded-full', color as string)} style={{ width: `${Math.min(100, ((val as number) / Math.max(selectedStage.positive, selectedStage.neutral, selectedStage.negative)) * 100)}%` }} /></div><span className="text-neutral-900">{val as number}</span>
                       </div>
                     ))}
                   </div>
@@ -687,20 +687,53 @@ export default function SentimentInsightDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="rounded-3xl border-0 shadow-sm">
+          <Card className="rounded-3xl border-0 shadow-sm transition-all hover:shadow-md">
             <CardContent className="p-6">
               <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                <h3 className="text-xl font-semibold">Domains and Categories for {selectedStage.stage}</h3>
-                <div className="flex gap-3"><select className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm"><option>Most Mentions</option><option>Lowest Sentiment</option></select><Input placeholder="Search" className="w-56 rounded-2xl" /></div>
+                <h3 className="text-h4 font-bold text-neutral-600">Domains and Categories for {selectedStage.stage}</h3>
+                <div className="flex gap-3">
+                  <select className="rounded-2xl border border-neutral-200 bg-white px-4 py-2 text-body-s font-bold text-neutral-700 outline-none">
+                    <option>Most Mentions</option>
+                    <option>Lowest Sentiment</option>
+                  </select>
+                  <Input placeholder="Search" className="w-56 rounded-2xl h-10 border-neutral-200" />
+                </div>
               </div>
-              <div className="overflow-hidden rounded-2xl border border-slate-200">
-                <table className="w-full text-sm">
-                  <thead className="bg-slate-50 text-slate-500"><tr><th className="p-4 text-left">Category Name</th><th>All</th><th>Negative</th><th>Neutral</th><th>Positive</th><th>Score</th><th>Change</th><th className="p-4 text-left">Current Period Breakdown</th></tr></thead>
-                  <tbody>
+              <div className="overflow-hidden rounded-2xl border border-neutral-200">
+                <table className="w-full text-body-s">
+                  <thead className="bg-neutral-100 text-neutral-500 font-bold border-b border-neutral-200">
+                    <tr>
+                      <th className="p-4 text-left uppercase tracking-wider">Category Name</th>
+                      <th className="text-center">All</th>
+                      <th className="text-center">Negative</th>
+                      <th className="text-center">Neutral</th>
+                      <th className="text-center">Positive</th>
+                      <th className="text-center">Score</th>
+                      <th className="text-center">Change</th>
+                      <th className="p-4 text-left uppercase tracking-wider">Current Period Breakdown</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-neutral-100">
                     {journeyCategories.map((row) => (
-                      <tr key={row.name} className="border-t border-slate-200 bg-white">
-                        <td className={cls('p-4 font-medium text-cyan-700', row.level === 1 && 'pl-10')}>{row.level === 0 ? '▸ ' : ''}{row.name}</td><td className="text-center">{row.all}</td><td className="text-center text-cyan-700">{row.negative}</td><td className="text-center text-cyan-700">{row.neutral}</td><td className="text-center text-cyan-700">{row.positive}</td><td className="text-center font-medium">{row.score}/100</td><td className={cls('text-center font-medium', row.change >= 0 ? 'text-emerald-600' : 'text-rose-600')}>{row.change > 0 ? '↑' : row.change < 0 ? '↓' : '='} {Math.abs(row.change)}</td>
-                        <td className="p-4"><div className="flex h-5 max-w-md overflow-hidden rounded-full bg-slate-100"><div className="bg-rose-500" style={{ width: `${row.negative / row.all * 100}%` }} /><div className="bg-amber-400" style={{ width: `${row.neutral / row.all * 100}%` }} /><div className="bg-emerald-400" style={{ width: `${row.positive / row.all * 100}%` }} /></div></td>
+                      <tr key={row.name} className="border-t border-neutral-200 bg-white hover:bg-neutral-100 transition-colors">
+                        <td className={cls('p-4 font-bold text-brand-800', row.level === 1 && 'pl-10')}>
+                          {row.level === 0 ? '▸ ' : ''}{row.name}
+                        </td>
+                        <td className="text-center font-bold">{row.all}</td>
+                        <td className="text-center text-error-500 font-bold">{row.negative}</td>
+                        <td className="text-center text-warning-500 font-bold">{row.neutral}</td>
+                        <td className="text-center text-success-500 font-bold">{row.positive}</td>
+                        <td className="text-center font-bold text-neutral-900">{row.score}/100</td>
+                        <td className={cls('text-center font-bold', row.change >= 0 ? 'text-success-500' : 'text-error-500')}>
+                          {row.change > 0 ? '↑' : row.change < 0 ? '↓' : '='} {Math.abs(row.change)}
+                        </td>
+                        <td className="p-4">
+                          <div className="flex h-5 max-w-md overflow-hidden rounded-full bg-neutral-100">
+                            <div className="bg-error-500" style={{ width: `${row.negative / row.all * 100}%` }} />
+                            <div className="bg-warning-500" style={{ width: `${row.neutral / row.all * 100}%` }} />
+                            <div className="bg-success-500" style={{ width: `${row.positive / row.all * 100}%` }} />
+                          </div>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -709,25 +742,43 @@ export default function SentimentInsightDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="rounded-3xl border-0 shadow-sm">
+          <Card className="rounded-3xl border-0 shadow-sm transition-all hover:shadow-md">
             <CardContent className="p-6">
               <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                <div><h2 className="text-3xl font-semibold tracking-tight">Overall experience: Speed</h2><p className="mt-2 text-sm text-slate-500">Detailed category analytics from the selected journey stage.</p></div>
-                <div className="flex gap-3"><select className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm"><option>All Sentiments</option><option>Negative</option><option>Positive</option></select><Button variant="outline" className="rounded-full">•••</Button></div>
+                <div>
+                  <h2 className="text-h1 font-bold tracking-tight text-neutral-900">Overall experience: Speed</h2>
+                  <p className="mt-2 text-body-s text-neutral-500">Detailed category analytics from the selected journey stage.</p>
+                </div>
+                <div className="flex gap-3">
+                  <select className="rounded-2xl border border-neutral-200 bg-white px-4 py-2 text-body-s font-bold text-neutral-700 outline-none">
+                    <option>All Sentiments</option>
+                    <option>Negative</option>
+                    <option>Positive</option>
+                  </select>
+                  <Button variant="outline" className="rounded-full">•••</Button>
+                </div>
               </div>
-              <div className="mb-6 flex gap-6 border-b border-slate-200">
-                {[['locations', 'Locations'], ['trend', 'Sentiment Trend'], ['cloud', 'Word Cloud']].map(([id, label]) => <button key={id} onClick={() => setJourneyDetailTab(id)} className={cls('pb-3 text-sm font-medium', journeyDetailTab === id ? 'border-b-2 border-cyan-700 text-cyan-700' : 'text-slate-500')}>{label}</button>)}
+              <div className="mb-6 flex gap-6 border-b border-neutral-200">
+                {[['locations', 'Locations'], ['trend', 'Sentiment Trend'], ['cloud', 'Word Cloud']].map(([id, label]) => (
+                  <button 
+                    key={id} 
+                    onClick={() => setJourneyDetailTab(id)} 
+                    className={cls('pb-3 text-body-s font-bold uppercase tracking-wider', journeyDetailTab === id ? 'border-b-2 border-brand-800 text-brand-800' : 'text-neutral-400 hover:text-neutral-600')}
+                  >
+                    {label}
+                  </button>
+                ))}
               </div>
 
-              {journeyDetailTab === 'locations' && <div className="h-80"><ResponsiveContainer width="100%" height="100%"><BarChart data={locationData}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="location" /><YAxis /><Tooltip /><Bar dataKey="negative" stackId="a" name="Negative" fill="#f43f5e" /><Bar dataKey="neutral" stackId="a" name="Neutral" fill="#fbbf24" /><Bar dataKey="positive" stackId="a" name="Positive" fill="#34d399" /><Line type="monotone" dataKey="sentiment" name="Category Sentiment" stroke="#0e7490" strokeWidth={3} /></BarChart></ResponsiveContainer></div>}
+              {journeyDetailTab === 'locations' && <div className="h-80"><ResponsiveContainer width="100%" height="100%"><BarChart data={locationData}><CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E5E5" /><XAxis dataKey="location" tick={{ fontSize: 10, fontWeight: 700 }} /><YAxis tick={{ fontSize: 10, fontWeight: 700 }} /><Tooltip /><Bar dataKey="negative" stackId="a" name="Negative" fill="var(--color-error-500)" /><Bar dataKey="neutral" stackId="a" name="Neutral" fill="var(--color-warning-500)" /><Bar dataKey="positive" stackId="a" name="Positive" fill="var(--color-success-500)" /><Line type="monotone" dataKey="sentiment" name="Category Sentiment" stroke="var(--color-brand-800)" strokeWidth={3} /></BarChart></ResponsiveContainer></div>}
 
-              {journeyDetailTab === 'trend' && <div className="h-80"><ResponsiveContainer width="100%" height="100%"><ReLineChart data={journeyTrend}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="month" /><YAxis /><Tooltip /><Line type="monotone" dataKey="sentiment" name="Category Sentiment" stroke="#0e7490" strokeWidth={3} /><Line type="monotone" dataKey="positive" name="Positive Volume" stroke="#10b981" strokeWidth={2} /><Line type="monotone" dataKey="negative" name="Negative Volume" stroke="#ef4444" strokeWidth={2} /></ReLineChart></ResponsiveContainer></div>}
+              {journeyDetailTab === 'trend' && <div className="h-80"><ResponsiveContainer width="100%" height="100%"><ReLineChart data={journeyTrend}><CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E5E5" /><XAxis dataKey="month" tick={{ fontSize: 10, fontWeight: 700 }} /><YAxis tick={{ fontSize: 10, fontWeight: 700 }} /><Tooltip /><Line type="monotone" dataKey="sentiment" name="Category Sentiment" stroke="var(--color-brand-800)" strokeWidth={3} /><Line type="monotone" dataKey="positive" name="Positive Volume" stroke="var(--color-success-500)" strokeWidth={2} /><Line type="monotone" dataKey="negative" name="Negative Volume" stroke="var(--color-error-500)" strokeWidth={2} /></ReLineChart></ResponsiveContainer></div>}
 
-              {journeyDetailTab === 'cloud' && <div className="rounded-3xl bg-slate-50 p-8"><div className="flex min-h-[260px] flex-wrap items-center justify-center gap-x-5 gap-y-3">{wordCloud.map((word, idx) => <button key={word} className={cls('font-medium', idx < 3 ? 'text-5xl text-emerald-400' : idx < 8 ? 'text-2xl text-cyan-700' : idx % 3 === 0 ? 'text-lg text-rose-500' : 'text-lg text-amber-500')}>{word}</button>)}</div></div>}
+              {journeyDetailTab === 'cloud' && <div className="rounded-3xl bg-neutral-100 p-8"><div className="flex min-h-[260px] flex-wrap items-center justify-center gap-x-5 gap-y-3">{wordCloud.map((word, idx) => <button key={word} className={cls('font-bold transition-transform hover:scale-110', idx < 3 ? 'text-h1 text-success-500' : idx < 8 ? 'text-h4 text-brand-800' : idx % 3 === 0 ? 'text-body-m text-error-500' : 'text-body-m text-warning-500')}>{word}</button>)}</div></div>}
 
               <div className="mt-8">
-                <h3 className="mb-3 text-xl font-semibold">Customer Quotes</h3>
-                <div className="grid gap-3 lg:grid-cols-3">{journeyQuotes.map((quote) => <div key={quote} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm leading-6 text-slate-700 shadow-sm">“{quote}”</div>)}</div>
+                <h3 className="mb-3 text-h4 font-bold text-neutral-900">Customer Quotes</h3>
+                <div className="grid gap-3 lg:grid-cols-3">{journeyQuotes.map((quote) => <div key={quote} className="rounded-2xl border border-neutral-200 bg-white p-4 text-body-s leading-6 text-neutral-700 shadow-sm transition-all hover:shadow-md hover:border-brand-800">“{quote}”</div>)}</div>
               </div>
             </CardContent>
           </Card>
@@ -738,19 +789,19 @@ export default function SentimentInsightDashboard() {
 
       {activeTab === 'insights' && (
       <>
-      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col gap-4 rounded-3xl bg-slate-950 p-6 text-white shadow-sm md:flex-row md:items-center md:justify-between">
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col gap-4 rounded-3xl bg-brand-950 p-6 text-white shadow-sm md:flex-row md:items-center md:justify-between">
           <div>
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm text-slate-200">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-body-s text-neutral-100">
               <Sparkles className="h-4 w-4" /> Insight-driven sentiment analysis
             </div>
-            <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Theme, sub-theme, correlation & keyword analysis</h1>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">
+            <h1 className="text-h1 font-bold tracking-tight">Theme, sub-theme, correlation & keyword analysis</h1>
+            <p className="mt-2 max-w-3xl text-body-m leading-6 text-neutral-200">
               Connect what customers feel with the exact operational drivers behind sentiment shifts across industries.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
             {industries.map((item) => (
-              <Button key={item} onClick={() => { setIndustry(item); setSelectedTheme(0); setQuery(""); }} variant="secondary" className={cls("rounded-full", item === industry ? "bg-white text-slate-950" : "bg-white/10 text-white hover:bg-white/20")}>{item}</Button>
+              <Button key={item} onClick={() => { setIndustry(item); setSelectedTheme(0); setQuery(""); }} variant="secondary" className={cls("rounded-full", item === industry ? "bg-white text-brand-950" : "bg-white/10 text-white hover:bg-white/20")}>{item}</Button>
             ))}
           </div>
         </motion.div>
@@ -762,29 +813,29 @@ export default function SentimentInsightDashboard() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-12">
-          <Card className="rounded-3xl border-0 shadow-sm lg:col-span-4">
+          <Card className="rounded-3xl border-0 shadow-sm lg:col-span-4 transition-all hover:shadow-md">
             <CardContent className="p-5">
               <div className="mb-4 flex items-center justify-between">
                 <div>
-                  <h2 className="text-lg font-semibold">Theme explorer</h2>
-                  <p className="text-sm text-slate-500">Ranked by sentiment risk and mention volume.</p>
+                  <h2 className="text-h4 font-bold text-neutral-600">Theme explorer</h2>
+                  <p className="text-body-s text-neutral-400">Ranked by sentiment risk and mention volume.</p>
                 </div>
-                <Filter className="h-5 w-5 text-slate-400" />
+                <Filter className="h-5 w-5 text-neutral-300" />
               </div>
               <div className="space-y-3">
                 {data.themes.map((t: any, index: number) => (
-                  <button key={t.name} onClick={() => setSelectedTheme(index)} className={cls("w-full rounded-2xl border p-4 text-left transition", index === selectedTheme ? "border-slate-950 bg-slate-950 text-white" : "border-slate-200 bg-white hover:border-slate-300")}> 
+                  <button key={t.name} onClick={() => setSelectedTheme(index)} className={cls("w-full rounded-2xl border p-4 text-left transition", index === selectedTheme ? "border-brand-950 bg-brand-950 text-white shadow-lg" : "border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-sm")}> 
                     <div className="flex items-center justify-between gap-3">
                       <div>
-                        <p className="font-semibold">{t.name}</p>
+                        <p className="font-bold text-body-m">{t.name}</p>
                       </div>
                       <ChevronRight className="h-5 w-5" />
                     </div>
-                    <div className="mt-4 h-2 rounded-full bg-slate-200/50">
-                      <div className={cls("h-2 rounded-full", t.sentiment >= 70 ? "bg-emerald-400" : t.sentiment >= 50 ? "bg-amber-400" : "bg-rose-400")} style={{ width: `${t.sentiment}%` }} />
+                    <div className="mt-4 h-2 rounded-full bg-neutral-200/50">
+                      <div className={cls("h-2 rounded-full transition-all duration-1000", t.sentiment >= 70 ? "bg-success-500" : t.sentiment >= 50 ? "bg-warning-500" : "bg-error-500")} style={{ width: `${t.sentiment}%` }} />
                     </div>
-                    <div className="mt-2 flex items-center justify-between text-xs">
-                      <span>Sentiment {t.sentiment}%</span>
+                    <div className="mt-2 flex items-center justify-between text-body-xs font-bold uppercase tracking-wider">
+                      <span className="opacity-80">Sentiment {t.sentiment}%</span>
                       <span>{t.delta > 0 ? "+" : ""}{t.delta} pts</span>
                     </div>
                   </button>
@@ -797,19 +848,19 @@ export default function SentimentInsightDashboard() {
             <CardContent className="p-5">
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div>
-                  <div className="flex items-center gap-3"><h2 className="text-xl font-semibold">{theme.name}</h2><SentimentPill value={theme.sentiment} /></div>
-                  <p className="mt-1 text-sm text-slate-500">Sub-themes explain why the theme sentiment moved.</p>
+                  <div className="flex items-center gap-3"><h2 className="text-h4 font-bold text-neutral-900">{theme.name}</h2><SentimentPill value={theme.sentiment} /></div>
+                  <p className="mt-1 text-body-s text-neutral-500 font-bold uppercase tracking-tight">Sub-themes explain why the theme sentiment moved.</p>
                 </div>
                 <div className="relative w-full md:w-72">
-                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
-                  <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search sub-theme or keyword" className="rounded-full border-slate-200 pl-9" />
+                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-neutral-400" />
+                  <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search sub-theme or keyword" className="rounded-full border-neutral-200 bg-neutral-100 pl-9 h-10 text-body-s outline-none focus:bg-white transition-all" />
                 </div>
               </div>
 
               <div className="mt-5 grid gap-5 lg:grid-cols-12">
                 <div className="lg:col-span-4 space-y-3">
                   <div>
-                    <p className="mb-2 text-sm font-medium text-slate-500">1. Choose sub-theme</p>
+                    <p className="mb-2 text-body-xs font-bold text-neutral-400 uppercase tracking-widest">1. Choose sub-theme</p>
                     {visibleSubthemes.map((s: any, idx: number) => (
                       <button
                         key={s.name}
@@ -818,31 +869,31 @@ export default function SentimentInsightDashboard() {
                           setSelectedKeyword(s.keywords?.[0]);
                         }}
                         className={cls(
-                          'mb-2 w-full rounded-2xl border p-4 text-left transition',
+                          'mb-2 w-full rounded-2xl border p-4 text-left transition-all',
                           subtheme?.name === s.name
-                            ? 'border-slate-950 bg-slate-950 text-white'
-                            : 'border-slate-200 bg-white hover:border-slate-300'
+                            ? 'border-brand-950 bg-brand-950 text-white shadow-lg'
+                            : 'border-neutral-200 bg-white hover:border-neutral-300'
                         )}
                       >
-                        <p className="font-semibold">{s.name}</p>
-                        <p className="mt-1 text-xs opacity-70">impact {s.impact} pts</p>
+                        <p className="font-bold text-body-m">{s.name}</p>
+                        <p className="mt-1 text-body-xs font-bold uppercase tracking-tighter opacity-70">impact {s.impact} pts</p>
                       </button>
                     ))}
                   </div>
                 </div>
 
                 <div className="lg:col-span-3">
-                  <p className="mb-2 text-sm font-medium text-slate-500">2. Explore keywords</p>
-                  <div className="flex flex-wrap gap-2 rounded-3xl border border-slate-200 bg-slate-50 p-4 min-h-[220px] content-start">
+                  <p className="mb-2 text-body-xs font-bold text-neutral-400 uppercase tracking-widest">2. Explore keywords</p>
+                  <div className="flex flex-wrap gap-2 rounded-3xl border border-neutral-200 bg-neutral-100 p-4 min-h-[220px] content-start">
                     {subtheme?.keywords?.map((k: string) => (
                       <button
                         key={k}
                         onClick={() => setSelectedKeyword(k)}
                         className={cls(
-                          'rounded-full px-4 py-2 text-sm transition',
+                          'rounded-full px-4 py-2 text-body-s font-bold transition-all shadow-sm',
                           keyword === k
-                            ? 'bg-slate-950 text-white'
-                            : 'bg-white border border-slate-200 text-slate-700 hover:border-slate-400'
+                            ? 'bg-neutral-950 text-white scale-105'
+                            : 'bg-white border border-neutral-200 text-neutral-700 hover:border-neutral-400'
                         )}
                       >
                         {k}
@@ -852,27 +903,27 @@ export default function SentimentInsightDashboard() {
                 </div>
 
                 <div className="lg:col-span-5">
-                  <p className="mb-2 text-sm font-medium text-slate-500">3. Representative reviews</p>
+                  <p className="mb-2 text-body-xs font-bold text-neutral-400 uppercase tracking-widest">3. Representative reviews</p>
                   <div 
                     onClick={() => setViewMode('reviews')}
-                    className="group cursor-pointer space-y-3 rounded-3xl border border-slate-200 bg-slate-50 p-4 min-h-[220px] transition-all hover:border-indigo-300 hover:bg-slate-100/50 hover:shadow-md"
+                    className="group cursor-pointer space-y-3 rounded-3xl border border-neutral-200 bg-neutral-100 p-4 min-h-[220px] transition-all hover:border-brand-300 hover:bg-white hover:shadow-md"
                   >
                     {reviews.map((review, idx) => (
-                      <div key={idx} className="rounded-2xl bg-white p-4 shadow-sm border border-slate-100">
+                      <div key={idx} className="rounded-2xl bg-white p-4 shadow-sm border border-neutral-100 transition-all group-hover:scale-[1.02]">
                         <div className="mb-2 flex items-center justify-between">
                           <span className={cls(
-                            'rounded-full px-3 py-1 text-xs font-medium',
+                            'rounded-full px-3 py-1 text-body-xs font-bold uppercase tracking-wider',
                             review.sentiment === 'Positive'
-                              ? 'bg-emerald-100 text-emerald-700'
+                              ? 'bg-success-500/10 text-success-500'
                               : review.sentiment === 'Negative'
-                              ? 'bg-rose-100 text-rose-700'
-                              : 'bg-amber-100 text-amber-700'
+                              ? 'bg-error-500/10 text-error-500'
+                              : 'bg-warning-500/10 text-warning-500'
                           )}>
                             {review.sentiment}
                           </span>
-                          <span className="text-xs text-slate-400">Keyword: {keyword}</span>
+                          <span className="text-body-xs font-bold text-neutral-400 uppercase tracking-tight">Keyword: {keyword}</span>
                         </div>
-                        <p className="text-sm leading-6 text-slate-700">“{review.text}”</p>
+                        <p className="text-body-s font-medium leading-relaxed text-neutral-700">“{review.text}”</p>
                       </div>
                     ))}
                   </div>
@@ -886,8 +937,8 @@ export default function SentimentInsightDashboard() {
           <Card className="rounded-3xl border-0 shadow-sm lg:col-span-7">
             <CardContent className="p-5">
               <div className="mb-4 flex items-center justify-between">
-                <div><h2 className="text-lg font-semibold">Sentiment movement</h2><p className="text-sm text-slate-500">Overall vs selected theme trend.</p></div>
-                <BarChart3 className="h-5 w-5 text-slate-400" />
+                <div><h2 className="text-h4 font-bold text-neutral-900">Sentiment movement</h2><p className="text-body-s text-neutral-500 uppercase font-bold tracking-tight">Overall vs selected theme trend.</p></div>
+                <BarChart3 className="h-5 w-5 text-neutral-400" />
               </div>
               <div className="h-72">
                 <ResponsiveContainer width="100%" height="100%">
@@ -904,18 +955,18 @@ export default function SentimentInsightDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="rounded-3xl border-0 shadow-sm lg:col-span-5">
+          <Card className="rounded-3xl border-0 shadow-sm lg:col-span-5 transition-all hover:shadow-md">
             <CardContent className="p-5">
-              <div className="mb-4"><h2 className="text-lg font-semibold">Correlation drivers</h2><p className="text-sm text-slate-500">Which sub-themes most strongly explain sentiment decline.</p></div>
+              <div className="mb-4"><h2 className="text-h4 font-bold text-neutral-900">Correlation drivers</h2><p className="text-body-s text-neutral-500 font-bold uppercase tracking-tight">Which sub-themes strongly explain sentiment decline.</p></div>
               <div className="h-72">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={data.correlation} layout="vertical" margin={{ top: 4, right: 20, left: 32, bottom: 4 }}>
-                    <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-                    <XAxis type="number" domain={[0, 1]} />
-                    <YAxis dataKey="driver" type="category" width={110} />
+                    <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#E5E5E5" />
+                    <XAxis type="number" domain={[0, 1]} tick={{ fontSize: 10, fontWeight: 700 }} />
+                    <YAxis dataKey="driver" type="category" width={110} tick={{ fontSize: 10, fontWeight: 700 }} />
                     <Tooltip />
-                    <Bar dataKey="correlation" name="Correlation strength" fill="#64748b" radius={[0, 10, 10, 0]}>
-                      {data.correlation.map((entry: any) => <Cell key={entry.driver} fill={entry.correlation > 0.7 ? '#1e293b' : '#64748b'} />)}
+                    <Bar dataKey="correlation" name="Correlation strength" fill="var(--color-neutral-400)" radius={[0, 10, 10, 0]}>
+                      {data.correlation.map((entry: any) => <Cell key={entry.driver} fill={entry.correlation > 0.7 ? 'var(--color-neutral-900)' : 'var(--color-neutral-400)'} />)}
                     </Bar>
                   </BarChart>
                 </ResponsiveContainer>
@@ -924,46 +975,46 @@ export default function SentimentInsightDashboard() {
           </Card>
         </div>
 
-        <Card className="rounded-3xl border-0 shadow-sm">
+        <Card className="rounded-3xl border-0 shadow-sm transition-all hover:shadow-md">
           <CardContent className="p-5">
             <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div>
-                <h2 className="text-lg font-semibold">Strengths & Weaknesses</h2>
-                <p className="text-sm text-slate-500">Estimated impact of each theme and sub-theme on overall review rating and survey NPS rating.</p>
+                <h2 className="text-h4 font-bold text-neutral-900">Strengths & Weaknesses</h2>
+                <p className="text-body-s text-neutral-500 font-bold uppercase tracking-tight">Estimated impact of each theme and sub-theme on overall review rating and survey NPS rating.</p>
               </div>
-              <div className="rounded-full bg-slate-100 px-4 py-2 text-xs font-medium text-slate-600">
+              <div className="rounded-full bg-neutral-100 px-4 py-2 text-body-xs font-bold text-neutral-600 uppercase tracking-widest">
                 Impact model: sentiment × mentions × correlation
               </div>
             </div>
 
             <div className="grid gap-5 lg:grid-cols-2">
-              <div className="rounded-3xl border border-emerald-100 bg-emerald-50/50 p-4">
+              <div className="rounded-3xl border border-success-100 bg-success-500/5 p-4">
                 <div className="mb-4 flex items-center justify-between">
                   <div>
-                    <h3 className="font-semibold text-emerald-900">Strengths lifting ratings</h3>
-                    <p className="text-sm text-emerald-700">Themes/sub-themes creating positive rating and NPS lift.</p>
+                    <h3 className="font-bold text-success-700">Strengths lifting ratings</h3>
+                    <p className="text-body-s text-success-600 font-bold uppercase tracking-tight">Themes/sub-themes creating positive rating and NPS lift.</p>
                   </div>
-                  <TrendingUp className="h-5 w-5 text-emerald-600" />
+                  <TrendingUp className="h-5 w-5 text-success-500" />
                 </div>
                 <div className="space-y-3">
                   {(strengths.length ? strengths : strengthWeaknessRows.filter((row: any) => row.sentiment >= data.sentiment).slice(0, 4)).map((row: any) => (
-                    <div key={`strength-${row.name}`} className="rounded-2xl bg-white p-4 shadow-sm">
+                    <div key={`strength-${row.name}`} className="rounded-2xl bg-white p-4 shadow-sm border border-success-500/10">
                       <div className="flex items-start justify-between gap-3">
                         <div>
-                          <p className="text-xs font-medium uppercase tracking-wide text-emerald-600">{row.type}</p>
-                          <p className="mt-1 font-semibold text-slate-950">{row.name}</p>
-                          <p className="mt-1 text-xs text-slate-500">{row.mentions.toLocaleString()} mentions · sentiment {row.sentiment}/100</p>
+                          <p className="text-body-xs font-bold uppercase tracking-wide text-success-500">{row.type}</p>
+                          <p className="mt-1 font-bold text-neutral-950">{row.name}</p>
+                          <p className="mt-1 text-body-xs font-bold text-neutral-400 uppercase tracking-tight">{row.mentions.toLocaleString()} mentions · sentiment {row.sentiment}/100</p>
                         </div>
                         <SentimentPill value={row.sentiment} />
                       </div>
                       <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-                        <div className="rounded-2xl bg-emerald-50 p-3">
-                          <p className="text-xs text-emerald-700">Review rating impact</p>
-                          <p className="mt-1 text-lg font-semibold text-emerald-700">+{Math.abs(row.reviewImpact || 1)} pts</p>
+                        <div className="rounded-2xl bg-success-500/5 p-3">
+                          <p className="text-body-xs font-bold uppercase tracking-tight text-success-600">Review rating impact</p>
+                          <p className="mt-1 text-h4 font-bold text-success-700">+{Math.abs(row.reviewImpact || 1)} pts</p>
                         </div>
-                        <div className="rounded-2xl bg-emerald-50 p-3">
-                          <p className="text-xs text-emerald-700">Survey NPS impact</p>
-                          <p className="mt-1 text-lg font-semibold text-emerald-700">+{Math.abs(row.npsImpact || 2)} pts</p>
+                        <div className="rounded-2xl bg-success-500/5 p-3">
+                          <p className="text-body-xs font-bold uppercase tracking-tight text-success-600">Survey NPS impact</p>
+                          <p className="mt-1 text-h4 font-bold text-success-700">+{Math.abs(row.npsImpact || 2)} pts</p>
                         </div>
                       </div>
                     </div>
@@ -971,33 +1022,33 @@ export default function SentimentInsightDashboard() {
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-rose-100 bg-rose-50/50 p-4">
+              <div className="rounded-3xl border border-error-100 bg-error-500/5 p-4">
                 <div className="mb-4 flex items-center justify-between">
                   <div>
-                    <h3 className="font-semibold text-rose-900">Weaknesses dragging ratings</h3>
-                    <p className="text-sm text-rose-700">Themes/sub-themes with the highest negative review and NPS impact.</p>
+                    <h3 className="font-bold text-error-700">Weaknesses dragging ratings</h3>
+                    <p className="text-body-s text-error-600 font-bold uppercase tracking-tight">Themes/sub-themes with the highest negative review and NPS impact.</p>
                   </div>
-                  <TrendingDown className="h-5 w-5 text-rose-600" />
+                  <TrendingDown className="h-5 w-5 text-error-500" />
                 </div>
                 <div className="space-y-3">
                   {weaknesses.map((row) => (
-                    <div key={`weakness-${row.name}`} className="rounded-2xl bg-white p-4 shadow-sm">
+                    <div key={`weakness-${row.name}`} className="rounded-2xl bg-white p-4 shadow-sm border border-error-500/10">
                       <div className="flex items-start justify-between gap-3">
                         <div>
-                          <p className="text-xs font-medium uppercase tracking-wide text-rose-600">{row.type}</p>
-                          <p className="mt-1 font-semibold text-slate-950">{row.name}</p>
-                          <p className="mt-1 text-xs text-slate-500">{row.mentions.toLocaleString()} mentions · sentiment {row.sentiment}/100</p>
+                          <p className="text-body-xs font-bold uppercase tracking-wide text-error-500">{row.type}</p>
+                          <p className="mt-1 font-bold text-neutral-950">{row.name}</p>
+                          <p className="mt-1 text-body-xs font-bold text-neutral-400 uppercase tracking-tight">{row.mentions.toLocaleString()} mentions · sentiment {row.sentiment}/100</p>
                         </div>
                         <SentimentPill value={row.sentiment} />
                       </div>
                       <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-                        <div className="rounded-2xl bg-rose-50 p-3">
-                          <p className="text-xs text-rose-700">Review rating impact</p>
-                          <p className="mt-1 text-lg font-semibold text-rose-700">{row.reviewImpact} pts</p>
+                        <div className="rounded-2xl bg-error-500/5 p-3">
+                          <p className="text-body-xs font-bold uppercase tracking-tight text-error-600">Review rating impact</p>
+                          <p className="mt-1 text-h4 font-bold text-error-700">{row.reviewImpact} pts</p>
                         </div>
-                        <div className="rounded-2xl bg-rose-50 p-3">
-                          <p className="text-xs text-rose-700">Survey NPS impact</p>
-                          <p className="mt-1 text-lg font-semibold text-rose-700">{row.npsImpact} pts</p>
+                        <div className="rounded-2xl bg-error-500/5 p-3">
+                          <p className="text-body-xs font-bold uppercase tracking-tight text-error-600">Survey NPS impact</p>
+                          <p className="mt-1 text-h4 font-bold text-error-700">{row.npsImpact} pts</p>
                         </div>
                       </div>
                     </div>
@@ -1008,39 +1059,39 @@ export default function SentimentInsightDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="rounded-3xl border-0 shadow-sm">
+        <Card className="rounded-3xl border-0 shadow-sm transition-all hover:shadow-md">
           <CardContent className="p-5">
             <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div>
-                <h2 className="text-lg font-semibold">Location Leaderboard</h2>
-                <p className="text-sm text-slate-500">Compare sentiment by location across sub-themes, grouped by theme and organizational hierarchy.</p>
+                <h2 className="text-h4 font-bold text-neutral-900">Location Leaderboard</h2>
+                <p className="text-body-s text-neutral-500 font-bold uppercase tracking-tight">Compare sentiment by location across sub-themes, grouped by theme and organizational hierarchy.</p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <select className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm">
+                <select className="rounded-2xl border border-neutral-200 bg-white px-4 py-2 text-body-s font-bold text-neutral-700 outline-none">
                   {leaderboardData.groupings.map((group: string) => <option key={group}>{`Group by: ${group}`}</option>)}
                 </select>
-                <Input placeholder="Search location" className="w-56 rounded-2xl" />
+                <Input placeholder="Search location" className="w-56 rounded-2xl border-neutral-200 h-10 text-body-s" />
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white">
+            <div className="overflow-hidden rounded-3xl border border-neutral-200 bg-white">
               <div className="overflow-x-auto">
-                <table className="min-w-[1400px] w-full text-sm">
+                <table className="min-w-[1400px] w-full text-body-s">
                   <thead>
-                    <tr className="border-b border-slate-200 bg-slate-50">
-                      <th rowSpan={2} className="sticky left-0 z-20 bg-slate-50 p-4 text-left font-semibold">Rank</th>
-                      <th rowSpan={2} className="sticky left-[72px] z-20 bg-slate-50 p-4 text-left font-semibold">Location</th>
-                      <th rowSpan={2} className="p-4 text-left font-semibold">Overall Sentiment</th>
+                    <tr className="border-b border-neutral-200 bg-neutral-100 font-bold text-neutral-500 uppercase tracking-widest text-body-xs">
+                      <th rowSpan={2} className="sticky left-0 z-20 bg-neutral-100 p-4 text-left">Rank</th>
+                      <th rowSpan={2} className="sticky left-[72px] z-20 bg-neutral-100 p-4 text-left">Location</th>
+                      <th rowSpan={2} className="p-4 text-left">Overall Sentiment</th>
                       {data.themes.map((theme: any) => (
-                        <th key={theme.name} colSpan={theme.subthemes.length} className="border-l border-slate-200 p-4 text-center font-semibold text-slate-700 text-xs">
+                        <th key={theme.name} colSpan={theme.subthemes.length} className="border-l border-neutral-200 p-4 text-center text-neutral-700">
                           {theme.name}
                         </th>
                       ))}
                     </tr>
-                    <tr className="border-b border-slate-200 bg-slate-50 text-[10px] text-slate-500">
+                    <tr className="border-b border-neutral-200 bg-neutral-100 text-[10px] text-neutral-400 font-bold uppercase tracking-tight">
                       {data.themes.flatMap((theme: any) =>
                         theme.subthemes.map((sub: any) => (
-                          <th key={`${theme.name}-${sub.name}`} className="border-l border-slate-200 p-3 text-center font-medium">
+                          <th key={`${theme.name}-${sub.name}`} className="border-l border-neutral-200 p-3 text-center">
                             {sub.name}
                           </th>
                         ))
@@ -1049,31 +1100,31 @@ export default function SentimentInsightDashboard() {
                   </thead>
                   <tbody>
                     {leaderboardData.rows.map((row: any, index: number) => (
-                      <tr key={row.name} className="border-b border-slate-100 hover:bg-slate-50">
-                        <td className="sticky left-0 z-10 bg-white p-4 text-center font-medium">{index + 1}</td>
-                        <td className="sticky left-[72px] z-10 bg-white p-4 font-semibold text-slate-900">
+                      <tr key={row.name} className="border-b border-neutral-100 hover:bg-neutral-50 transition-colors">
+                        <td className="sticky left-0 z-10 bg-white p-4 text-center font-bold text-neutral-400">{index + 1}</td>
+                        <td className="sticky left-[72px] z-10 bg-white p-4 font-bold text-neutral-900 border-r border-neutral-100">
                           <div>
                             <p>{row.name}</p>
-                            <p className="text-xs font-normal text-slate-500">{row.group}</p>
+                            <p className="text-body-xs font-bold uppercase tracking-tight text-neutral-400">{row.group}</p>
                           </div>
                         </td>
                         <td className="p-4">
-                          <div className="inline-flex min-w-[70px] items-center gap-2 rounded-xl bg-emerald-50 px-3 py-2 font-medium text-emerald-700">
-                            <div className="h-8 w-1 rounded-full bg-emerald-500" />
+                          <div className="inline-flex min-w-[70px] items-center gap-2 rounded-xl bg-success-500/10 px-3 py-2 font-bold text-success-500">
+                            <div className="h-8 w-1 rounded-full bg-success-500" />
                             {row.overall}
                           </div>
                         </td>
                         {leaderboardColumns.map((col: any) => {
                           const val = row[col] || 0;
                           return (
-                            <td key={`${row.name}-${col}`} className="p-4 text-center">
+                            <td key={`${row.name}-${col}`} className="p-4 text-center border-l border-neutral-100">
                               <div className={cls(
-                                'mx-auto inline-flex min-w-[74px] items-center gap-2 rounded-xl px-3 py-2 font-medium',
-                                val >= 75 ? 'bg-emerald-50 text-emerald-700' : val >= 55 ? 'bg-amber-50 text-amber-700' : 'bg-rose-50 text-rose-700'
+                                'mx-auto inline-flex min-w-[74px] items-center gap-2 rounded-xl px-3 py-2 font-bold',
+                                val >= 75 ? 'bg-success-500/10 text-success-500' : val >= 55 ? 'bg-warning-500/10 text-warning-500' : 'bg-error-500/10 text-error-500'
                               )}>
                                 <div className={cls(
                                   'h-8 w-1 rounded-full',
-                                  val >= 75 ? 'bg-emerald-500' : val >= 55 ? 'bg-amber-500' : 'bg-rose-500'
+                                  val >= 75 ? 'bg-success-500' : val >= 55 ? 'bg-warning-500' : 'bg-error-500'
                                 )} />
                                 {val}
                               </div>
